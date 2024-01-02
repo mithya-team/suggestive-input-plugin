@@ -1,14 +1,14 @@
 import * as React from "react";
-import UserDetailsForm from "./components/UserDetailsForm";
+import InputPlayground from "./components/InputPlayground";
 
 const App: React.FC = () => {
   return (
     <>
       <div>
-        <h1>Form Component Playground</h1>
+        <h1>Input Component Playground</h1>
 
         <div>
-          <UserDetailsForm />
+          <InputPlayground />
         </div>
       </div>
     </>
