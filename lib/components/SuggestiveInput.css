@@ -1,0 +1,61 @@
+/* Root of the component */
+.suggestive-input--root {
+  position: relative;
+  width: 300px; /* Adjust the width as needed */
+}
+
+/* Input field styling */
+.suggestive-input--input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Suggestion list styling */
+.suggestive-input--list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none; /* Make it look connected to the input */
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  max-height: 200px; /* Adjust based on your need */
+  overflow-y: auto; /* Enable scroll if list is too long */
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.suggestive-input--loading {
+}
+
+.suggestive-input--no-suggestion {
+}
+
+/* Individual suggestion item */
+.suggestive-input--item {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee; /* subtle separator */
+}
+
+/* Highlighted text within suggestions */
+.suggestive-input--highlighted {
+  background-color: yellow; /* Highlight color */
+  font-weight: bold; /* Make it bold */
+}
+
+/* Suggestion item - Hover and Active States */
+.suggestive-input--item:hover,
+.suggestive-input--item:active,
+.suggestive-input--item.active {
+  /* class for active suggestion */
+  background-color: #f0f0f0; /* Slightly darker on hover */
+}
+
+.suggestive-input-item--active {
+  background-color: #f0f0f0; /* Highlight color */
+}

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, KeyboardEvent } from "react";
 import HighlightMatch from "./HighlightMatch";
+import "./SuggestiveInput.css";
 
 export interface SuggestiveInputProps {
   fetchSuggestions: (input: string) => Promise<string[]> | string[];
   onSelection: (value: string) => void;
   debounceTime?: number;
+  defaultValue?: string;
   classes?: {
     root?: string;
     input?: string;
@@ -17,6 +19,7 @@ export interface SuggestiveInputProps {
   };
   loadingComponent?: React.ReactNode; // Custom component for loading state
   noSuggestionsComponent?: React.ReactNode; // Custom component when no suggestions found
+  allowStrictSelection?: boolean; // allow output to strictly match any option from suggestions
 }
 
 const SuggestiveInput: React.FC<SuggestiveInputProps> = ({
@@ -24,14 +27,16 @@ const SuggestiveInput: React.FC<SuggestiveInputProps> = ({
   onSelection,
   debounceTime = 300,
   classes,
-  loadingComponent = <span>Loading...</span>, // Default loading component
+  defaultValue = "",
+  loadingComponent = <span>Loading...</span>,
   noSuggestionsComponent = <span>No matches found</span>,
+  allowStrictSelection = true,
 }) => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(defaultValue);
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [shouldFetch, setShouldFetch] = useState(true);
+  const [shouldFetch, setShouldFetch] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -70,7 +75,9 @@ const SuggestiveInput: React.FC<SuggestiveInputProps> = ({
       setActiveSuggestionIndex(activeSuggestionIndex - 1);
     } else if (event.key === "Enter") {
       event.preventDefault();
-      selectSuggestion(suggestions[activeSuggestionIndex]);
+      if (allowStrictSelection || activeSuggestionIndex > -1)
+        selectSuggestion(suggestions[activeSuggestionIndex]);
+      else selectSuggestion(inputValue);
     }
   };
 
@@ -84,6 +91,7 @@ const SuggestiveInput: React.FC<SuggestiveInputProps> = ({
     setShouldFetch(false);
     setSuggestions([]);
     setShowSuggestions(false);
+    setActiveSuggestionIndex(-1);
   };
 
   const shouldShowSuggestion =
@@ -93,11 +101,11 @@ const SuggestiveInput: React.FC<SuggestiveInputProps> = ({
       (!isLoading && suggestions.length > 0));
 
   return (
-    <div className={classes?.root}>
+    <div className={`suggestive-input--root ${classes?.root}`}>
       <input
         type="text"
         ref={inputRef}
-        className={classes?.input}
+        className={`suggestive-input--input ${classes?.input}`}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -110,14 +118,20 @@ const SuggestiveInput: React.FC<SuggestiveInputProps> = ({
         <ul
           id="suggestions"
           role="listbox"
-          className={classes?.suggestionList}
+          className={`suggestive-input--list ${classes?.suggestionList}`}
           onMouseLeave={() => setActiveSuggestionIndex(-1)}
         >
           {isLoading && (
-            <li className={classes?.loading}>{loadingComponent}</li>
+            <li className={`suggestive-input--loading ${classes?.loading}`}>
+              {loadingComponent}
+            </li>
           )}
           {!isLoading && suggestions.length === 0 && (
-            <li className={classes?.noSuggestions}>{noSuggestionsComponent}</li>
+            <li
+              className={`suggestive-input--no-suggestion ${classes?.noSuggestions}`}
+            >
+              {noSuggestionsComponent}
+            </li>
           )}
           {!isLoading &&
             suggestions.map((suggestion, index) => (
@@ -127,9 +141,9 @@ const SuggestiveInput: React.FC<SuggestiveInputProps> = ({
                 id={`suggestion-${index}`}
                 role="option"
                 aria-selected={index === activeSuggestionIndex}
-                className={`${classes?.suggestionItem} ${
+                className={`suggestive-input--item ${classes?.suggestionItem} ${
                   index === activeSuggestionIndex
-                    ? classes?.activeSuggestion
+                    ? `suggestive-input-item--active ${classes?.activeSuggestion}`
                     : ""
                 }`}
                 onMouseDown={() => handleSuggestionClick(index)} // Use onMouseDown to ensure the click is registered before the input blurs
@@ -138,7 +152,9 @@ const SuggestiveInput: React.FC<SuggestiveInputProps> = ({
                 <HighlightMatch
                   pattern={inputValue}
                   text={suggestion}
-                  classes={{ highlighted: classes?.highlighted }}
+                  classes={{
+                    highlighted: `suggestive-input--highlighted ${classes?.highlighted}`,
+                  }}
                 />
               </li>
             ))}
