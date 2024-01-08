@@ -1,5 +1,5 @@
 {
-  "name": "suggestive-input-plugin",
+  "name": "@mithya/suggestive-input-plugin",
   "private": true,
   "version": "0.0.0",
   "type": "module",
