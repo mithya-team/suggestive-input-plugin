@@ -1,4 +1,4 @@
-# SuggestiveInput Component Documentation
+# SuggestiveInput Plugin
 
 ## Introduction
 
@@ -11,6 +11,20 @@
 - Keyboard navigation for selecting suggestions.
 - Customizable styling via a classes object.
 - Support for loading and "no match" states with custom render options.
+
+## Installation
+
+Install the package via npm or yarn:
+
+```bash
+npm install suggestive-input-plugin
+```
+
+or
+
+```bash
+yarn add suggestive-input-plugin
+```
 
 ## Usage
 
@@ -217,3 +231,12 @@ The component can be fully customized via the `classes` prop.
   ...
 />
 ```
+
+Checkout the [playground code]() for implementation
+
+## Issues and Pull Requests
+
+Contributions are always welcome! If you encounter any issues or would like to contribute, please file an issue or submit a PR:
+
+Issues: GitHub Issues
+Pull Requests: GitHub Pull Requests
