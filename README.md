@@ -232,7 +232,7 @@ The component can be fully customized via the `classes` prop.
 />
 ```
 
-Checkout the [playground code]() for implementation
+Checkout the [playground code](https://github.com/mithya-team/suggestive-input-plugin/blob/main/src/App.tsx) for implementation
 
 ## Issues and Pull Requests
 
