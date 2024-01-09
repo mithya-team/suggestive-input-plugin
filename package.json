@@ -4,12 +4,12 @@
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
-  "homepage": "https://github.com/mithya-team/react-form-plugin/blob/main/README.md",
+  "homepage": "https://github.com/mithya-team/suggestive-input-plugin/blob/main/README.md",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
-    "url": "https://github.com/mithya-team/react-form-plugin",
+    "url": "https://github.com/mithya-team/suggestive-input-plugin",
     "type": "git"
   },
   "main": "./dist/suggestive-input-plugin.umd.cjs",

@@ -17,13 +17,13 @@
 Install the package via npm or yarn:
 
 ```bash
-npm install suggestive-input-plugin
+npm install @mithya-team/suggestive-input-plugin
 ```
 
 or
 
 ```bash
-yarn add suggestive-input-plugin
+yarn add @mithya-team/suggestive-input-plugin
 ```
 
 ## Usage
@@ -32,7 +32,7 @@ To use the `SuggestiveInput` component, you'll need to have a function ready to 
 
 ```tsx
 import React from "react";
-import SuggestiveInput from "suggestive-input-plugin";
+import SuggestiveInput from "@mithya-team/suggestive-input-plugin";
 
 const App = () => {
   const handleSelection = (value) => {
@@ -67,7 +67,7 @@ export default App;
 ```tsx
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { SuggestiveInput } from "suggestive-input-plugin"; // ensure this is the correct path to your component
+import { SuggestiveInput } from "@mithya-team/suggestive-input-plugin";
 
 const mockFetchSuggestions = async (input: string): Promise<string[]> => {
   const allSuggestions = ["apple", "banana", "cherry", "date", "eggfruit"];
