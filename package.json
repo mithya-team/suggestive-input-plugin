@@ -1,7 +1,7 @@
 {
   "name": "@mithya-team/suggestive-input-plugin",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "type": "module",
   "homepage": "https://github.com/mithya-team/suggestive-input-plugin/blob/main/README.md",
