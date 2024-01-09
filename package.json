@@ -1,8 +1,17 @@
 {
-  "name": "@mithya/suggestive-input-plugin",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@mithya-team/suggestive-input-plugin",
+  "private": false,
+  "version": "0.0.1",
+  "license": "MIT",
   "type": "module",
+  "homepage": "https://github.com/mithya-team/react-form-plugin/blob/main/README.md",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "url": "https://github.com/mithya-team/react-form-plugin",
+    "type": "git"
+  },
   "main": "./dist/suggestive-input-plugin.umd.cjs",
   "module": "./dist/suggestive-input-plugin.js",
   "types": "./dist/suggestive-input-plugin.d.ts",
@@ -21,7 +30,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publish-npm": "yarn build && yarn publish --access public"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -36,6 +46,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
